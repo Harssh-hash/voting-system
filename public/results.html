@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voting Results</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Compact, centered chart box */
+    .chart-container {
+      width: 60%;
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* Responsive adjustment */
+    @media (max-width: 768px) {
+      .chart-container {
+        width: 90%;
+      }
+    }
+
+    /* Table styling */
+    table {
+      width: 70%;
+      max-width: 700px;
+      margin: 20px auto 50px;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #23395B;
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #f5f9ff;
+    }
+
+    td {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 Live Voting Results</h1>
+    <p></p>
+  </header>
+
+  <main>
+    <!-- Chart Section -->
+    <div class="chart-container">
+      <canvas id="resultsChart"></canvas>
+    </div>
+
+    <!-- Table Section -->
+    <table id="resultsTable">
+      <thead>
+        <tr>
+          <th>Political Party</th>
+          <th>Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be dynamically filled -->
+      </tbody>
+    </table>
+
+    <a href="index.html" class="btn">⬅️ Back to Voting</a>
+  </main>
+
+  <footer>
+    <div class="tricolor-line"></div>
+    <p> Election Results </p>
+  </footer>
+
+  <script>
+    const ctx = document.getElementById('resultsChart').getContext('2d');
+    let chart;
+
+    function updateTable(data) {
+      const tbody = document.querySelector('#resultsTable tbody');
+      tbody.innerHTML = '';
+      for (let [party, count] of Object.entries(data)) {
+        const row = `<tr>
+          <td>${party}</td>
+          <td>${count}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      }
+    }
+
+    function loadResults() {
+      fetch("/results")
+        .then(res => res.json())
+        .then(data => {
+          const parties = Object.keys(data);
+          const counts = Object.values(data);
+
+          // Chart colors (optional: party-inspired)
+          const colors = [
+            "#FF9933", // BJP - saffron
+            "#1E90FF", // INC - blue
+            "#CCCCCC", // AAP - grayish white
+            "#800080", // BSP - purple
+            "#FF6600", // Shiv Sena - orange
+            "#A9A9A9", // Others - gray
+            "#000000"  // NOTA - black
+          ];
+
+          if (!chart) {
+            chart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: parties,
+                datasets: [{
+                  label: 'Votes',
+                  data: counts,
+                  backgroundColor: colors,
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: { display: false }
+                },
+                scales: {
+                  y: { beginAtZero: true }
+                }
+              }
+            });
+          } else {
+            chart.data.datasets[0].data = counts;
+            chart.update();
+          }
+
+          updateTable(data);
+        });
+    }
+
+    loadResults();
+    setInterval(loadResults, 3000); // auto-refresh every 3s
+  </script>
+</body>
+</html>
+
+
+

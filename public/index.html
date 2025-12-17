@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>India Online Voting System</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Election Commission of India</h1>
+    <p>Online Voting System </p>
+  </header>
+
+  <main>
+    <h2>Cast Your Vote</h2>
+    <div class="evm-grid">
+      <div class="card" onclick="vote('Bharatiya Janata Party (BJP)')">🪷 BJP</div>
+      <div class="card" onclick="vote('Indian National Congress (INC)')">✋ INC</div>
+      <div class="card" onclick="vote('Aam Aadmi Party (AAP)')">🧹 AAP</div>
+      <div class="card" onclick="vote('Bahujan Samaj Party (BSP)')">🐘 BSP</div>
+      <div class="card" onclick="vote('Shiv Sena')">🔱 Shiv Sena</div>
+      <div class="card" onclick="vote('Others')">👥 Others</div>
+      <div class="card" onclick="vote('NOTA')">🚫 NOTA</div>
+    </div>
+
+    <p id="message"></p>
+    <a href="results.html" class="btn">📊 View Live Results</a>
+  </main>
+
+  <footer>
+    <div class="tricolor-line"></div>
+    <p>Lil Demo Voting Project </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

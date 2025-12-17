@@ -1,0 +1,99 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f9fafb;
+  color: #222;
+  margin: 0;
+  text-align: center;
+}
+
+/* Header */
+header {
+  background: #23395B;
+  color: white;
+  padding: 20px 0;
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+header p {
+  margin: 5px 0;
+}
+
+/* Tricolor line footer */
+.tricolor-line {
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, #FF9933, #FFFFFF, #138808);
+}
+
+/* Main section */
+main {
+  padding: 40px 20px;
+}
+
+h2 {
+  color: #23395B;
+}
+
+/* EVM-style grid */
+.evm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  max-width: 700px;
+  margin: 30px auto;
+}
+
+.card {
+  background: white;
+  padding: 25px 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  background-color: #f0f8ff;
+}
+
+/* Message and Buttons */
+#message {
+  margin-top: 20px;
+  font-weight: 600;
+  color: #1e7f2d;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 12px 25px;
+  background: #23395B;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #1b2f4d;
+}
+
+/* Footer */
+footer {
+  background: #fff;
+  padding: 15px;
+  font-size: 14px;
+  color: #555;
+  margin-top: 50px;
+}
+
